@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de advinha</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="main">
+        <button id="btn_start">Começar o jogo</button>
+        <h3 class="procura">
+            Escolha um nível de dificuldade <br>
+            E clique no botão para começar o jogo
+        </h3>
+
+        <div class="area_nivel">
+            <input type="radio" name="nivel" id="nivel1">
+            <label for="nivel1">Fácil</label>
+
+            <input type="radio" name="nivel" id="nivel2">
+            <label for="nivel2">Médio</label>
+
+            <input type="radio" name="nivel" id="nivel3">
+            <label for="nivel3">Difícil</label>
+        </div>
+
+        <div class="area_game">
+            <div class="area" id="area_1"> </div>
+            <div class="area" id="area_2"> </div>
+            <div class="area" id="area_3"> </div>
+            <div class="area" id="area_4"> </div>
+            <div class="area" id="area_5"> </div>
+            <div class="area" id="area_6"> </div>
+        </div>
+
+        <div class="tempo">
+            <p id="acertos"></p>
+            <p id="erros"></p>
+            <br>
+            <hr>
+            <br>
+            Jogo desenvolvido por Hudson Mateque <br>
+            whatsapp: 929782402
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+
+</html>

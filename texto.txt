@@ -1,0 +1,3 @@
+1º Criar um número aleatório a ser procurado
+2º Gerar 6 números aleatório e escondelos
+3º Se o número encontrado for o mesmo número que foi pedido para procurar então vc venceu
