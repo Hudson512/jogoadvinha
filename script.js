@@ -14,13 +14,47 @@ const arr_area = [
 let randomNumber3
 let numeroDeAcertos = 0
 let numeroDeErros = 0
+let sDificuldade = document.querySelectorAll(".navigation .bar")
 
+let main = document.querySelector(".main")
 
 
 //Adicionando eleventos as Tags HTML
 btnComecarJogo.addEventListener('click', start)
 
 
+
+sDificuldade[0].addEventListener("click", select_dificul_0)
+sDificuldade[1].addEventListener("click", select_dificul_1)
+sDificuldade[2].addEventListener("click", select_dificul_2)
+
+function select_dificul_0() {
+    sDificuldade[0].style.border = "2px solid rgb(77, 179, 30)"
+    sDificuldade[1].style.border = "2px solid #FFF"
+    sDificuldade[2].style.border = "2px solid #FFF"
+
+    sDificuldade[0].style.backgroundColor = "rgb(77, 179, 30)"
+    sDificuldade[1].style.backgroundColor = "#FFF"
+    sDificuldade[2].style.backgroundColor = "#FFF"
+}
+function select_dificul_1() {
+    sDificuldade[0].style.border = "2px solid #FFF"
+    sDificuldade[1].style.border = "2px solid rgb(77, 179, 30)"
+    sDificuldade[2].style.border = "2px solid #FFF"
+
+    sDificuldade[0].style.backgroundColor = "#FFF"
+    sDificuldade[1].style.backgroundColor = "rgb(77, 179, 30)"
+    sDificuldade[2].style.backgroundColor = "#FFF"
+}
+function select_dificul_2() {
+    sDificuldade[0].style.border = "2px solid #FFF"
+    sDificuldade[1].style.border = "2px solid #FFF"
+    sDificuldade[2].style.border = "2px solid rgb(77, 179, 30)"
+
+    sDificuldade[0].style.backgroundColor = "#FFF"
+    sDificuldade[1].style.backgroundColor = "#FFF"
+    sDificuldade[2].style.backgroundColor = "rgb(77, 179, 30)"
+}
 
 
 
@@ -33,9 +67,6 @@ function start() {
     const erros = document.querySelector("#erros")
 
     let area_nivel = document.querySelector(".area_nivel")
-    let area_1 = document.querySelector("#area_1")
-    let area_2 = document.querySelector("#area_3")
-    let area_3 = document.querySelector("#area_5")
 
     const nivel_1 = document.querySelector("#nivel1").checked
     const nivel_2 = document.querySelector("#nivel2").checked
@@ -45,15 +76,54 @@ function start() {
     //Escolha de nível de dificuldade
 
     if (nivel_1) {
-        area_1.style.color = "rgba(255, 255, 255, 0.05)"
-        area_2.style.color = "rgba(255, 255, 255, 0.05)"
-        area_3.style.color = "rgba(255, 255, 255, 0.05)"
-        
-    }else if (nivel_2) {
-        area_3.style.color = "rgba(255, 255, 255, 0.05)"
-        
-    }else if (nivel_3) {
-        
+        setTimeout(() => {
+            for (let i = 0; i < arr_area.length; i++) {
+                if (i == 0 || i == 2 || i == 4) {
+                    continue
+                }
+                
+                arr_area[i].style.backgroundColor = "black"
+                arr_area[i].style.color = "black"
+                arr_area[i].style.border = "2px solid white"
+            }
+
+            arr_area[0].style.color = "rgba(255, 255, 255, 0.05)"
+            arr_area[2].style.color = "rgba(255, 255, 255, 0.05)"
+            arr_area[4].style.color = "rgba(255, 255, 255, 0.05)"
+            sDificuldade[1].style.display = "none"
+            sDificuldade[2].style.display = "none"
+        }, 300);
+
+    } else if (nivel_2) {
+        setTimeout(() => {
+            for (let i = 0; i < arr_area.length; i++) {
+                if (i == 4) {
+                    continue
+                }
+                
+                arr_area[i].style.backgroundColor = "black"
+                arr_area[i].style.color = "black"
+                arr_area[i].style.border = "2px solid white"
+            }
+
+            arr_area[4].style.color = "rgba(255, 255, 255, 0.05)"
+            sDificuldade[0].style.display = "none"
+            sDificuldade[2].style.display = "none"
+        }, 300);
+
+
+    } else if (nivel_3) {
+        setTimeout(() => {
+            for (let i = 0; i < arr_area.length; i++) {
+                arr_area[i].style.backgroundColor = "black"
+                arr_area[i].style.color = "black"
+                arr_area[i].style.border = "2px solid white"
+            }
+
+            sDificuldade[0].style.display = "none"
+            sDificuldade[1].style.display = "none"
+        }, 300);
+
     } else {
         alert("Selecione um nível antes de começar o Jogo")
         window.location.reload()
@@ -76,6 +146,17 @@ function start() {
     erros.innerHTML = "Nº de erros: " + numeroDeErros
     area_nivel.style.display = "none"
 
+    //Main borda volta a cor normal
+    setTimeout(() => {
+        main.style.border = "2px solid rgb(66, 34, 34)"
+        arr.forEach(function (e, i) {
+            arr_area[i].innerHTML = e
+            arr_area[i].style.backgroundColor = "black"
+            arr_area[i].style.border = "2px solid white"
+        });
+    }, 300);
+
+
 
     //Add valores na array "arr"
     for (let i = 5; i >= arr.length;) {
@@ -90,11 +171,7 @@ function start() {
         }
     }
 
-    arr.forEach(function (e, i) {
-        arr_area[i].innerHTML = e
-        arr_area[i].style.backgroundColor = "black"
-        arr_area[i].style.border = "2px solid white"
-    });
+
 
 
 
@@ -104,11 +181,11 @@ function start() {
             if (confirm("🙂 VOCÊ VENCEU, DESEJA JOGAR NOVAMENTE?")) {
                 window.location.reload()
             }
-        }, 500);
+        }, 300);
 
     } else {
         setTimeout(() => {
-            procurarO.innerHTML = "Encontre onde está o número " + randomNumber2
+            procurarO.innerHTML = "Onde está o número " + randomNumber2 + " ?"
 
             switch (randomNumber2) {
                 case 1:
@@ -133,7 +210,7 @@ function start() {
 
             setTimeout(() => {
                 btnComecarJogo.innerHTML = "Pedir novo número"
-            }, 500);
+            }, 100);
 
         }, 200);
     }
@@ -144,7 +221,7 @@ function start() {
             if (confirm("😥 VOCÊ PERDEU, DESEJA JOGAR NOVAMENTE?")) {
                 window.location.reload()
             }
-        }, 500);
+        }, 300);
 
     }
 
@@ -153,183 +230,135 @@ function start() {
 
 
 function mostrarNumero_0() {
-    arr_area[0].style.backgroundColor = "wheat";
-    arr_area[0].style.border = "2px solid black"
-
-    for (let i = 0; i < arr_area.length; i++) {
-        if (i === 0) {
-            continue
-        }
-        arr_area[i].style.backgroundColor = "black"
-        arr_area[i].style.border = "2px solid white"
-    }
 
     setTimeout(() => {
-        if (randomNumber3 === Number(arr_area[0].textContent)) {
+        if (randomNumber3 == Number(arr_area[0].textContent)) {
             setTimeout(() => {
+                arr_area[0].style.color = "white"
+                arr_area[0].style.border = "2px solid rgb(77, 179, 30)"
                 numeroDeAcertos = numeroDeAcertos + 1
+                main.style.border = "2px solid rgb(77, 179, 30)"
                 start()
             }, 200);
 
         } else {
-            for (let i = 0; i < arr_area.length; i++) {
-                arr_area[i].style.backgroundColor = "black"
-                arr_area[i].style.border = "2px solid white"
-            }
+            arr_area[0].style.color = "white"
+            arr_area[0].style.border = "2px solid rgb(208, 25, 25)"
             numeroDeErros = numeroDeErros + 1
+            main.style.border = "2px solid rgb(208, 25, 25)"
             start()
         }
-    }, 500);
+    }, 200);
 
 
 }
 
 function mostrarNumero_1() {
-    arr_area[1].style.backgroundColor = "wheat"
-    arr_area[1].style.border = "2px solid black"
-
-    for (let i = 0; i < arr_area.length; i++) {
-        if (i === 1) {
-            continue
-        }
-        arr_area[i].style.backgroundColor = "black"
-        arr_area[i].style.border = "2px solid white"
-    }
 
     setTimeout(() => {
-        if (randomNumber3 === Number(arr_area[1].textContent)) {
+        if (randomNumber3 == Number(arr_area[1].textContent)) {
             setTimeout(() => {
+                arr_area[1].style.color = "white"
+                arr_area[1].style.border = "2px solid rgb(77, 179, 30)"
                 numeroDeAcertos = numeroDeAcertos + 1
+                main.style.border = "2px solid rgb(77, 179, 30)"
                 start()
             }, 200);
 
         } else {
-            for (let i = 0; i < arr_area.length; i++) {
-                arr_area[i].style.backgroundColor = "black"
-                arr_area[i].style.border = "2px solid white"
-            }
+            arr_area[1].style.color = "white"
+            arr_area[1].style.border = "2px solid rgb(208, 25, 25)"
             numeroDeErros = numeroDeErros + 1
+            main.style.border = "2px solid rgb(208, 25, 25)"
             start()
         }
-    }, 500);
+    }, 200);
 }
 
 function mostrarNumero_2() {
-    arr_area[2].style.backgroundColor = "wheat"
-    arr_area[2].style.border = "2px solid black"
-
-    for (let i = 0; i < arr_area.length; i++) {
-        if (i === 2) {
-            continue
-        }
-        arr_area[i].style.backgroundColor = "black"
-        arr_area[i].style.border = "2px solid white"
-    }
 
     setTimeout(() => {
-        if (randomNumber3 === Number(arr_area[2].textContent)) {
+        if (randomNumber3 == Number(arr_area[2].textContent)) {
             setTimeout(() => {
+                arr_area[2].style.color = "white"
+                arr_area[2].style.border = "2px solid rgb(77, 179, 30)"
                 numeroDeAcertos = numeroDeAcertos + 1
+                main.style.border = "2px solid rgb(77, 179, 30)"
                 start()
             }, 200);
 
         } else {
-            for (let i = 0; i < arr_area.length; i++) {
-                arr_area[i].style.backgroundColor = "black"
-                arr_area[i].style.border = "2px solid white"
-            }
+            arr_area[2].style.color = "white"
+            arr_area[2].style.border = "2px solid rgb(208, 25, 25)"
             numeroDeErros = numeroDeErros + 1
+            main.style.border = "2px solid rgb(208, 25, 25)"
             start()
         }
-    }, 500);
+    }, 200);
 }
 
 function mostrarNumero_3() {
-    arr_area[3].style.backgroundColor = "wheat"
-    arr_area[3].style.border = "2px solid black"
-
-    for (let i = 0; i < arr_area.length; i++) {
-        if (i === 3) {
-            continue
-        }
-        arr_area[i].style.backgroundColor = "black"
-        arr_area[i].style.border = "2px solid white"
-    }
 
     setTimeout(() => {
-        if (randomNumber3 === Number(arr_area[3].textContent)) {
+        if (randomNumber3 == Number(arr_area[3].textContent)) {
             setTimeout(() => {
+                arr_area[3].style.color = "white"
+                arr_area[3].style.border = "2px solid rgb(77, 179, 30)"
                 numeroDeAcertos = numeroDeAcertos + 1
+                main.style.border = "2px solid rgb(77, 179, 30)"
                 start()
             }, 200);
 
         } else {
-            for (let i = 0; i < arr_area.length; i++) {
-                arr_area[i].style.backgroundColor = "black"
-                arr_area[i].style.border = "2px solid white"
-            }
+            arr_area[3].style.color = "white"
+            arr_area[3].style.border = "2px solid rgb(208, 25, 25)"
             numeroDeErros = numeroDeErros + 1
+            main.style.border = "2px solid rgb(208, 25, 25)"
             start()
         }
-    }, 500);
+    }, 200);
 }
 
 function mostrarNumero_4() {
-    arr_area[4].style.backgroundColor = "wheat"
-    arr_area[4].style.border = "2px solid black"
-
-    for (let i = 0; i < arr_area.length; i++) {
-        if (i === 4) {
-            continue
-        }
-        arr_area[i].style.backgroundColor = "black"
-        arr_area[i].style.border = "2px solid white"
-    }
 
     setTimeout(() => {
-        if (randomNumber3 === Number(arr_area[4].textContent)) {
+        if (randomNumber3 == Number(arr_area[4].textContent)) {
             setTimeout(() => {
+                arr_area[4].style.color = "white"
+                arr_area[4].style.border = "2px solid rgb(77, 179, 30)"
                 numeroDeAcertos = numeroDeAcertos + 1
+                main.style.border = "2px solid rgb(77, 179, 30)"
                 start()
             }, 200);
 
         } else {
-            for (let i = 0; i < arr_area.length; i++) {
-                arr_area[i].style.backgroundColor = "black"
-                arr_area[i].style.border = "2px solid white"
-            }
+            arr_area[4].style.color = "white"
+            arr_area[4].style.border = "2px solid rgb(208, 25, 25)"
             numeroDeErros = numeroDeErros + 1
+            main.style.border = "2px solid rgb(208, 25, 25)"
             start()
         }
-    }, 500);
+    }, 200);
 }
 
 function mostrarNumero_5() {
-    arr_area[5].style.backgroundColor = "wheat"
-    arr_area[5].style.border = "2px solid black"
-
-    for (let i = 0; i < arr_area.length; i++) {
-        if (i === 5) {
-            continue
-        }
-        arr_area[i].style.backgroundColor = "black"
-        arr_area[i].style.border = "2px solid white"
-    }
 
     setTimeout(() => {
-        if (randomNumber3 === Number(arr_area[5].textContent)) {
+        if (randomNumber3 == Number(arr_area[5].textContent)) {
             setTimeout(() => {
+                arr_area[5].style.color = "white"
+                arr_area[5].style.border = "2px solid rgb(77, 179, 30)"
                 numeroDeAcertos = numeroDeAcertos + 1
+                main.style.border = "2px solid rgb(77, 179, 30)"
                 start()
             }, 200);
 
         } else {
-            for (let i = 0; i < arr_area.length; i++) {
-                arr_area[i].style.backgroundColor = "black"
-                arr_area[i].style.border = "2px solid white"
-            }
+            arr_area[5].style.color = "white"
+            arr_area[5].style.border = "2px solid rgb(208, 25, 25)"
             numeroDeErros = numeroDeErros + 1
+            main.style.border = "2px solid rgb(208, 25, 25)"
             start()
         }
-    }, 500);
+    }, 200);
 }
