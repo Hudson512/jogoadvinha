@@ -1,4 +1,10 @@
 # jogoadvinha
+//
+//
+Link do jogo
+https://jogoadvinha.netlify.app/
+//
+//
 Mine jogo de advinha
 Usando html, css e js
 
